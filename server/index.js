@@ -273,6 +273,7 @@ app.post('/restockItem', function(request, response)
 });
 
 //ADD YOUR CODE BELOW THIS COMMENT, IF IT IS POSSIBLE
+
 app.post('/sales', function(request, response) 
 {
 	var headers = {};
@@ -303,10 +304,6 @@ app.post('/sales', function(request, response)
             year = parseInt(request.body.year);
 		else 
 			year = null;
-        
-        
-        
-	
 	}
 	else
 	{
@@ -318,7 +315,7 @@ app.post('/sales', function(request, response)
     if (discount!=null && year!=null)
 	{
 		//aceptable input
-		if (discount<=100 && discount >=0){
+		if (discount <= 100 && discount >= 0){
             result = shopManager.sales(year,discount);
         
 
@@ -327,20 +324,8 @@ app.post('/sales', function(request, response)
                 response.writeHead(200, headers);
                 response.end(JSON.stringify(itemSold));
             }
-            else
-            {
-                response.writeHead(404, headers);
-                response.end(JSON.stringify());
-            }
-
-        }
-        else    
-            {
-                //unaceptable input
-                response.writeHead(406, headers);
-                response.end(JSON.stringify("1"));
-            }
     }else{
+        //unaceptable input
         response.writeHead(406, headers);
         response.end(JSON.stringify("Discount deve essere compreso tra 0 e 100"));
     }
