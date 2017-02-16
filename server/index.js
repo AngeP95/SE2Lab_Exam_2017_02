@@ -322,7 +322,7 @@ app.post('/sales', function(request, response)
             if (result!= null)
             {
                 response.writeHead(200, headers);
-                response.end(JSON.stringify(itemSold));
+                response.end(JSON.stringify(result));
             }
     }else{
         //unaceptable input
