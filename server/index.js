@@ -273,6 +273,81 @@ app.post('/restockItem', function(request, response)
 });
 
 //ADD YOUR CODE BELOW THIS COMMENT, IF IT IS POSSIBLE
+app.post('/sales', function(request, response) 
+{
+	var headers = {};
+	headers["Access-Control-Allow-Origin"] = "*";
+	headers["Access-Control-Allow-Methods"] = "POST, GET, PUT, DELETE, OPTIONS";
+	headers["Access-Control-Allow-Credentials"] = false;
+	headers["Access-Control-Max-Age"] = '86400'; // 24 hours
+	headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept";
+	headers["Content-Type"] = "application/json";
+
+	var discount;
+    var year;
+    
+    var result;
+    
+	
+	//check body and parameters
+	if ( typeof request.body !== 'undefined' && request.body)
+	{
+        //discount
+		if ( typeof request.body.discount !== 'undefined' && request.body.discount)
+			 discount = parseInt(request.body.discount);
+		else 
+			discount = null;
+        
+        //year
+        if ( typeof request.body.year !== 'undefined' && request.body.year)
+            year = parseInt(request.body.year);
+		else 
+			year = null;
+        
+        
+        
+	
+	}
+	else
+	{
+		year = null;
+        discount = null;
+	}
+    
+		
+    if (discount!=null && year!=null)
+	{
+		//aceptable input
+		if (discount<=100 && discount >=0){
+            result = shopManager.sales(year,discount);
+        
+
+            if (result!= null)
+            {
+                response.writeHead(200, headers);
+                response.end(JSON.stringify(itemSold));
+            }
+            else
+            {
+                response.writeHead(404, headers);
+                response.end(JSON.stringify());
+            }
+
+        }
+        else    
+            {
+                //unaceptable input
+                response.writeHead(406, headers);
+                response.end(JSON.stringify("1"));
+            }
+    }else{
+        response.writeHead(406, headers);
+        response.end(JSON.stringify("Discount deve essere compreso tra 0 e 100"));
+    }
+
+});
+
+
 
 
 app.listen(app.get('port'), function() {

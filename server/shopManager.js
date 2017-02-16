@@ -256,7 +256,20 @@ var restockItem = function restockItem(item)
 }
 
 //ADD YOUR CODE BELOW THIS COMMENT, IF IT IS POSSIBLE
-
+var sales = function sales(year,disount)
+{
+    var perc;
+    var tmp = [];
+    for (i=0; i < warehouse.length; i++)
+	{
+		if (warehouse[i].season == year){
+            perc = (warehouse[i].price * disount)/100;
+           warehouse[i].price = warehouse[i].price - perc;
+           tmp.push(warehouse[i].season, warehouse[i].price);
+        }   
+    }
+    return tmp;    
+}
 //export functions
 exports.getWarehouse = getWarehouse; 
 exports.searchItems = searchItems; 

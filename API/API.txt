@@ -112,30 +112,58 @@ paths:
             type: array
             items:
               $ref: "#/definitions/item"
+
+
+
+
+ /restockItem:
+    post:
+      summary:  returns false if is impossible to insert or update an item, true otherwise. 
+      description: insert a new item or update its quantity if the item already exist
+      parameters:
+        - name: item
+          in: formData
+          description: item
+          required: true
+          type: $ref: "#/definitions/item" 
+      responses:
+        200:
+          description: object of the restocked item
+          schema: 
+              $ref: "#/definitions/item"
+        406:
+          description: ID of error
+          schema: 
+            properties:
+              error:
+                type: integer
+        400:
+          description: error
           
+ 
 definitions:
   item:
     properties:
       ID:
-        type: string
-        description: ID of the pizza
+        type: integer
+        description: ID of the item
       type:
         type: string
-        description: name of the pizza
+        description: type of the item
       size:
-        type: integer
-        description: price of the pizza
+        type: string
+        description: size of the item
       quantity:
         type: integer
-        description: price of the pizza
+        description: quantity of the item
       colour:
         type: string
-        description: name of the pizza
+        description: colour of the item
       price:
         type: integer
-        description: price of the pizza
+        description: price of the item
       season:
         type: integer
-        description: price of the pizza
+        description: season of the item
 
         
