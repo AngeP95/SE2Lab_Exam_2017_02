@@ -316,18 +316,19 @@ app.post('/sales', function(request, response)
 	{
 		//aceptable input
 		if (discount <= 100 && discount >= 0){
-            result = shopManager.sales(year,discount);
+            		result = shopManager.sales(year,discount);
         
 
-            if (result!= null)
-            {
-                response.writeHead(200, headers);
-                response.end(JSON.stringify(result));
-            }
-    }else{
-        //unaceptable input
-        response.writeHead(406, headers);
-        response.end(JSON.stringify("Discount deve essere compreso tra 0 e 100"));
+            		if (result!= null)
+            		{
+               			 response.writeHead(200, headers);
+                		response.end(JSON.stringify(result));
+            		}
+    		}else{
+			//unaceptable input
+			response.writeHead(406, headers);
+			response.end(JSON.stringify("Discount deve essere compreso tra 0 e 100"));
+		}
     }
 
 });
